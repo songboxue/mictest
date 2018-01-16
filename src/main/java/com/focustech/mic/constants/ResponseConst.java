@@ -5,7 +5,9 @@ package com.focustech.mic.constants;
  * Date: 2018/1/16
  * Description:
  */
-public class ResponseConstant {
+public class ResponseConst {
 
     public static final String SUCCESS = "success";
+
+    public static final int CODE = 0 ;
 }

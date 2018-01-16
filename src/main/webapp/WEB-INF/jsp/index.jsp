@@ -1,5 +1,8 @@
 <html>
 <body>
-<h2>I got the cookie string : ${user}</h2>
+<h1>MICCN Test Framework</h1>
+<div class="user-form">
+    <form action="100"></form>
+</div>
 </body>
 </html>
