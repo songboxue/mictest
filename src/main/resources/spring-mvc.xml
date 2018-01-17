@@ -11,9 +11,35 @@
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd
                         ">
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.focustech.mic.controller" />
-    <!-- 静态资源 -->
-    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.focustech.mic" />
+    <!-- 处理json请求与响应 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                        <value>application/xml;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <list>
+                        <!-- 默认的意思就是不配置这个属性，配置了就不是默认了 -->
+                        <!-- 是否输出值为null的字段 ，默认是false-->
+                        <value>WriteMapNullValue</value>
+                        <value>WriteNullNumberAsZero</value>
+                        <value>WriteNullListAsEmpty</value>
+                        <value>WriteNullStringAsEmpty</value>
+                        <value>WriteNullBooleanAsFalse</value>
+                        <value>WriteDateUseDateFormat</value>
+
+                    </list>
+                </property>
+            </bean>
+
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <mvc:resources mapping="/html/css/**" location="/WEB-INF/css/" cache-period="31556926"/>
     <mvc:resources mapping="/html/js/**" location="/WEB-INF/js/" cache-period="31556926"/>

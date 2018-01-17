@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 
@@ -22,37 +23,33 @@ import java.io.IOException;
  * Description:
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/loginVO")
 public class LoginController {
 
     @Autowired
     private ILoginService iLoginService;
 
-    @RequestMapping(value = "/cookie.do",method = RequestMethod.GET)
-    public String loginByCookie(){
-        String url = "http://membercenter.cn.made-in-china.com/member/main/";
-        String result = null;
-        HttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.setHeader("Cookie","");
-        try{
-            HttpResponse resp = client.execute(httpGet);
-            HttpEntity httpEntity = resp.getEntity();
-            result = EntityUtils.toString(httpEntity);
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(result);
-        return null;
-    }
-
+    //根据手动获取到的cookie登录到VO
     @RequestMapping(value = "/setCookie.do",method = RequestMethod.POST)
     public ServerResponse setCookie(String cookie){
         ServerResponse serverResponse = iLoginService.setCookie(cookie);
 
-
         return serverResponse;
+    }
+
+    //根据输入的帐密登录到VO
+    @RequestMapping(value = "/userLogin.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse loginVOByUsername(String username,String password) throws IOException {
+        ServerResponse serverResponse =  iLoginService.loginVOByUsername(username,password);
+        return serverResponse;
+    }
+
+    //获取首页
+    @RequestMapping(value = "/getIndex.do")
+    @ResponseBody
+    public ServerResponse getVoIndex() {
+        String voIndexPage = iLoginService.getVoIndexPage();
+        return ServerResponse.successData(voIndexPage);
     }
 }
