@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.focustech.mic.dao.MicCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.focustech.mic.pojo.MicCase" >
+    <constructor >
+      <idArg column="case_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="case_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="case_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="project_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="data_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="data_send" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="data_receive" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="data_expect" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="case_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="adder_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="adder_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="update_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    case_id, case_name, case_desc, project_id, data_url, data_send, data_receive, data_expect, 
+    case_status, adder_no, adder_name, create_time, update_no, update_name, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mic_case
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mic_case
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.focustech.mic.pojo.MicCase" >
+    insert into mic_case (case_id, case_name, case_desc, 
+      project_id, data_url, data_send, 
+      data_receive, data_expect, case_status, 
+      adder_no, adder_name, create_time, 
+      update_no, update_name, update_time
+      )
+    values (#{caseId,jdbcType=INTEGER}, #{caseName,jdbcType=VARCHAR}, #{caseDesc,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{dataUrl,jdbcType=VARCHAR}, #{dataSend,jdbcType=VARCHAR}, 
+      #{dataReceive,jdbcType=VARCHAR}, #{dataExpect,jdbcType=VARCHAR}, #{caseStatus,jdbcType=INTEGER}, 
+      #{adderNo,jdbcType=INTEGER}, #{adderName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateNo,jdbcType=INTEGER}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.focustech.mic.pojo.MicCase" >
+    insert into mic_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="caseDesc != null" >
+        case_desc,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="dataUrl != null" >
+        data_url,
+      </if>
+      <if test="dataSend != null" >
+        data_send,
+      </if>
+      <if test="dataReceive != null" >
+        data_receive,
+      </if>
+      <if test="dataExpect != null" >
+        data_expect,
+      </if>
+      <if test="caseStatus != null" >
+        case_status,
+      </if>
+      <if test="adderNo != null" >
+        adder_no,
+      </if>
+      <if test="adderName != null" >
+        adder_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateNo != null" >
+        update_no,
+      </if>
+      <if test="updateName != null" >
+        update_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="dataUrl != null" >
+        #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSend != null" >
+        #{dataSend,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReceive != null" >
+        #{dataReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="dataExpect != null" >
+        #{dataExpect,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        #{caseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="adderNo != null" >
+        #{adderNo,jdbcType=INTEGER},
+      </if>
+      <if test="adderName != null" >
+        #{adderName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateNo != null" >
+        #{updateNo,jdbcType=INTEGER},
+      </if>
+      <if test="updateName != null" >
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.focustech.mic.pojo.MicCase" >
+    update mic_case
+    <set >
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        case_desc = #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="dataUrl != null" >
+        data_url = #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSend != null" >
+        data_send = #{dataSend,jdbcType=VARCHAR},
+      </if>
+      <if test="dataReceive != null" >
+        data_receive = #{dataReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="dataExpect != null" >
+        data_expect = #{dataExpect,jdbcType=VARCHAR},
+      </if>
+      <if test="caseStatus != null" >
+        case_status = #{caseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="adderNo != null" >
+        adder_no = #{adderNo,jdbcType=INTEGER},
+      </if>
+      <if test="adderName != null" >
+        adder_name = #{adderName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateNo != null" >
+        update_no = #{updateNo,jdbcType=INTEGER},
+      </if>
+      <if test="updateName != null" >
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.focustech.mic.pojo.MicCase" >
+    update mic_case
+    set case_name = #{caseName,jdbcType=VARCHAR},
+      case_desc = #{caseDesc,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      data_url = #{dataUrl,jdbcType=VARCHAR},
+      data_send = #{dataSend,jdbcType=VARCHAR},
+      data_receive = #{dataReceive,jdbcType=VARCHAR},
+      data_expect = #{dataExpect,jdbcType=VARCHAR},
+      case_status = #{caseStatus,jdbcType=INTEGER},
+      adder_no = #{adderNo,jdbcType=INTEGER},
+      adder_name = #{adderName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_no = #{updateNo,jdbcType=INTEGER},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where case_id = #{caseId,jdbcType=INTEGER}
+  </update>
+</mapper>
