@@ -30,4 +30,6 @@ public class CaseController {
         ServerResponse response = iCaseService.addCase(micCase);
         return response;
     }
+
+
 }
