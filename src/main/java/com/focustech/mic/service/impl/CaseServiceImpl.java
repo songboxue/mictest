@@ -20,7 +20,7 @@ public class CaseServiceImpl implements ICaseService {
 
     @Override
     public ServerResponse addCase(MicCase micCase) {
-        int result = micCaseMapper.insert(micCase);
+        int result = micCaseMapper.insertSelective(micCase);
         if(result < 1){
             return ServerResponse.error(1,"插入失败");
         }

@@ -51,7 +51,7 @@ public class LoginServiceImpl implements ILoginService {
         while(matcher.find()){
             sb.append(matcher.group(1)).append("&callback=focusSSOController.doCrossDomainCallBack&scriptId=ssoscript0");
         }
-        sso = loginNewUrl(sb.toString());
+        sso = loginNewUrl(username,sb.toString());
         if(sso.contains("ssoscript0")){
             return ServerResponse.success();
         }
@@ -59,10 +59,10 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public String getVoIndexPage(){
+    public String getVoIndexPage(String username){
         HttpClient client = null;
         try {
-            client = ClientManager.getClient();
+            client = ClientManager.getClient(username);
         } catch (Exception e) {
             e.printStackTrace();
             return "Get client error";
@@ -105,18 +105,18 @@ public class LoginServiceImpl implements ILoginService {
         HttpEntity entity = response.getEntity();
         String cdResult = EntityUtils.toString(entity);
 
-        ClientManager.setClient(client);//把当前client放到ThreadLocal
+        ClientManager.setClient(username,client);//把当前client放到ThreadLocal
 
         entity.consumeContent();//关闭流
 
         return cdResult;
     }
 
-    private String loginNewUrl(String newUrl) throws IOException {
+    private String loginNewUrl(String username,String newUrl) throws IOException {
         HttpClient client = null;
         String result;
         try {
-            client = ClientManager.getClient();
+            client = ClientManager.getClient(username);
         } catch (Exception e) {
             e.printStackTrace();
         }

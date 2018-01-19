@@ -1,5 +1,6 @@
 package com.focustech.mic.common;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.focustech.mic.constants.ResponseConst;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
  * Date: 2018/1/16 21:38
  * Description:
  */
+
 public class ServerResponse<T> implements Serializable{
 
     private int code;

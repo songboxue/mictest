@@ -21,6 +21,7 @@ public class CaseController {
     @Autowired
     private ICaseService iCaseService;
 
+    //增加用例
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse addCase(MicCase micCase){
@@ -31,5 +32,7 @@ public class CaseController {
         return response;
     }
 
+    //批量执行用例
+    
 
 }

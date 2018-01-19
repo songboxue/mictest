@@ -15,8 +15,6 @@ public class MicCase {
 
     private String dataSend;
 
-    private String dataReceive;
-
     private String dataExpect;
 
     private Integer caseStatus;
@@ -33,14 +31,13 @@ public class MicCase {
 
     private Date updateTime;
 
-    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, String dataUrl, String dataSend, String dataReceive, String dataExpect, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
+    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, String dataUrl, String dataSend, String dataExpect, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
         this.caseId = caseId;
         this.caseName = caseName;
         this.caseDesc = caseDesc;
         this.projectId = projectId;
         this.dataUrl = dataUrl;
         this.dataSend = dataSend;
-        this.dataReceive = dataReceive;
         this.dataExpect = dataExpect;
         this.caseStatus = caseStatus;
         this.adderNo = adderNo;
@@ -101,14 +98,6 @@ public class MicCase {
 
     public void setDataSend(String dataSend) {
         this.dataSend = dataSend == null ? null : dataSend.trim();
-    }
-
-    public String getDataReceive() {
-        return dataReceive;
-    }
-
-    public void setDataReceive(String dataReceive) {
-        this.dataReceive = dataReceive == null ? null : dataReceive.trim();
     }
 
     public String getDataExpect() {

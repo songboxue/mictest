@@ -11,7 +11,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd
                         ">
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.focustech.mic" />
+    <context:component-scan base-package="com.focustech.mic.controller" />
     <!-- 处理json请求与响应 -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -27,11 +27,11 @@
                     <list>
                         <!-- 默认的意思就是不配置这个属性，配置了就不是默认了 -->
                         <!-- 是否输出值为null的字段 ，默认是false-->
-                        <value>WriteMapNullValue</value>
-                        <value>WriteNullNumberAsZero</value>
-                        <value>WriteNullListAsEmpty</value>
-                        <value>WriteNullStringAsEmpty</value>
-                        <value>WriteNullBooleanAsFalse</value>
+                        <!--<value>WriteMapNullValue</value>-->
+                        <!--<value>WriteNullNumberAsZero</value>-->
+                        <!--<value>WriteNullListAsEmpty</value>-->
+                        <!--<value>WriteNullStringAsEmpty</value>-->
+                        <!--<value>WriteNullBooleanAsFalse</value>-->
                         <value>WriteDateUseDateFormat</value>
 
                     </list>
