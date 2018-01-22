@@ -45,6 +45,8 @@ public class ClientManager {
     根据当前登录的用户名，管理当前httpclient对象，可在程序其他地方调用
      */
     private static Map<String,HttpClient> clientHolder = new HashMap<>();
+    //todo username只在set时传入，需要修改这边的实现方式和业务方法。
+    private static String username;
 
     public static HttpClient getClient(String username) {
         HttpClient client = clientHolder.get(username);

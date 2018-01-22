@@ -4,6 +4,7 @@ import com.focustech.mic.common.ServerResponse;
 import com.focustech.mic.dao.MicCaseMapper;
 import com.focustech.mic.pojo.MicCase;
 import com.focustech.mic.service.ICaseService;
+import com.focustech.mic.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,29 @@ public class CaseServiceImpl implements ICaseService {
     public List<MicCase> getCaseList(Integer pid) {
         List<MicCase> micCases = micCaseMapper.selectByPId(pid);
         return micCases;
+    }
+
+    @Override
+    public ServerResponse updateCase(MicCase micCase) {
+        int result = micCaseMapper.updateByPrimaryKeySelective(micCase);
+        if(result<1){
+            return ServerResponse.error(2,"更新数据库失败");
+        }
+        MicCase newCase = micCaseMapper.selectByPrimaryKey(micCase.getCaseId());
+        return ServerResponse.successData(newCase);
+    }
+
+    @Override
+    public ServerResponse exeCase(Integer caseId) {
+        String url,body,result;
+        //取出对应的case
+        MicCase micCase = micCaseMapper.selectByPrimaryKey(caseId);
+        if(micCase == null){
+            return ServerResponse.error(1,"数据库中无此记录");
+        }
+        url = micCase.getDataUrl();
+        body = micCase.getDataSend();
+        result = HttpUtil.doPost(url,body);
+        return ServerResponse.successData(result);
     }
 }

@@ -14,4 +14,8 @@ public interface ICaseService {
     ServerResponse addCase(MicCase micCase);
 
     List<MicCase> getCaseList(Integer pid);
+
+    ServerResponse updateCase(MicCase micCase);
+
+    ServerResponse exeCase(Integer caseId);
 }

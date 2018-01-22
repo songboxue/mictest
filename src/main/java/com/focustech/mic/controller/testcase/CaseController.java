@@ -49,8 +49,18 @@ public class CaseController {
 
     //更新用例
     @RequestMapping(value = "update")
-    public String updateCase(MicCase micCase){
-        //todo
-        return null;
+    public ServerResponse updateCase(MicCase micCase){
+        if(micCase == null){
+            return ServerResponse.error(1,"更新数据为空");
+        }
+        return iCaseService.updateCase(micCase);
+    }
+
+    //执行单个用例
+    public ServerResponse executeCase(Integer caseId){
+        if(caseId == null){
+            return ServerResponse.error(1,"请选择要执行的用例");
+        }
+        return iCaseService.exeCase(caseId);
     }
 }
