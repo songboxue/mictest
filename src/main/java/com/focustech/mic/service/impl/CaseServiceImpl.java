@@ -7,6 +7,8 @@ import com.focustech.mic.service.ICaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * User: songboxue
  * Date: 2018/1/18
@@ -25,5 +27,11 @@ public class CaseServiceImpl implements ICaseService {
             return ServerResponse.error(1,"插入失败");
         }
         return ServerResponse.success();
+    }
+
+    @Override
+    public List<MicCase> getCaseList(Integer pid) {
+        List<MicCase> micCases = micCaseMapper.selectByPId(pid);
+        return micCases;
     }
 }

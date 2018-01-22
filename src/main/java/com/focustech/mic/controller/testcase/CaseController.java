@@ -5,9 +5,15 @@ import com.focustech.mic.pojo.MicCase;
 import com.focustech.mic.service.ICaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: songboxue
@@ -32,7 +38,19 @@ public class CaseController {
         return response;
     }
 
-    //批量执行用例
-    
+    //根据项目id获取用例数据
+    @RequestMapping(value = "/getList")
+    public String getCaseList(@RequestParam(value = "pid",required = false)Integer pid, Model model){
+        List<MicCase> micCaseList = new ArrayList<>();
+        micCaseList = iCaseService.getCaseList(pid);
+        model.addAttribute("mcList",micCaseList);
+        return "case/list";
+    }
 
+    //更新用例
+    @RequestMapping(value = "update")
+    public String updateCase(MicCase micCase){
+        //todo
+        return null;
+    }
 }
