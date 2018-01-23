@@ -14,5 +14,5 @@ public interface ILoginService {
 
     ServerResponse loginVOByUsername(String username, String password) throws IOException;
 
-    String getVoIndexPage(String username);
+    String getVoIndexPage();
 }

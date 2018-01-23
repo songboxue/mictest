@@ -1,6 +1,7 @@
 package com.focustech.mic.util;
 
 import com.focustech.mic.common.ClientManager;
+import com.focustech.mic.constants.ResponseConst;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -47,7 +48,7 @@ public class HttpUtil {
         }
         apiUrl += param;
         String result = null;
-        HttpClient httpclient = ClientManager.getClient("");
+        HttpClient httpclient = ClientManager.getClient();
         try {
             HttpGet httpPost = new HttpGet(apiUrl);
             HttpResponse response = httpclient.execute(httpPost);
@@ -85,7 +86,7 @@ public class HttpUtil {
      * @return
      */
     public static String doPost(String apiUrl, Map<String, Object> params) {
-        HttpClient httpClient = ClientManager.getClient("");
+        HttpClient httpClient = ClientManager.getClient();
         String httpStr = null;
         HttpPost httpPost = new HttpPost(apiUrl);
         HttpResponse response = null;
@@ -125,7 +126,7 @@ public class HttpUtil {
      * @return
      */
     public static String doPost(String apiUrl, Object json) {
-        HttpClient httpClient = ClientManager.getClient("");
+        HttpClient httpClient = ClientManager.getClient();
         String httpStr = null;
         HttpPost httpPost = new HttpPost(apiUrl);
         HttpResponse response = null;

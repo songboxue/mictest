@@ -51,7 +51,7 @@ public class LoginServiceImpl implements ILoginService {
         while(matcher.find()){
             sb.append(matcher.group(1)).append("&callback=focusSSOController.doCrossDomainCallBack&scriptId=ssoscript0");
         }
-        sso = loginNewUrl(username,sb.toString());
+        sso = loginNewUrl(sb.toString());
         if(sso.contains("ssoscript0")){
             return ServerResponse.success();
         }
@@ -59,10 +59,10 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public String getVoIndexPage(String username){
+    public String getVoIndexPage(){
         HttpClient client = null;
         try {
-            client = ClientManager.getClient(username);
+            client = ClientManager.getClient();
         } catch (Exception e) {
             e.printStackTrace();
             return "Get client error";
@@ -84,8 +84,8 @@ public class LoginServiceImpl implements ILoginService {
 
     private String loginCD(String username,String password) throws IOException {
         HttpClient client = new DefaultHttpClient();
-        HttpHost proxy = new HttpHost("192.168.16.67", 8080);
-        client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        //HttpHost proxy = new HttpHost("192.168.16.67", 8080);
+        //client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         String cdUrl = "http://cd.abiz.com/logon/gbk";
         HttpPost post = new HttpPost(cdUrl);
         //添加所需要的post内容
@@ -112,11 +112,11 @@ public class LoginServiceImpl implements ILoginService {
         return cdResult;
     }
 
-    private String loginNewUrl(String username,String newUrl) throws IOException {
+    private String loginNewUrl(String newUrl) throws IOException {
         HttpClient client = null;
         String result;
         try {
-            client = ClientManager.getClient(username);
+            client = ClientManager.getClient();
         } catch (Exception e) {
             e.printStackTrace();
         }

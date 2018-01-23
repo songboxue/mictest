@@ -48,7 +48,7 @@ public class CaseController {
     }
 
     //更新用例
-    @RequestMapping(value = "update")
+    @RequestMapping(value = "/update")
     public ServerResponse updateCase(MicCase micCase){
         if(micCase == null){
             return ServerResponse.error(1,"更新数据为空");
@@ -57,6 +57,8 @@ public class CaseController {
     }
 
     //执行单个用例
+    @RequestMapping(value = "/execute")
+    @ResponseBody
     public ServerResponse executeCase(Integer caseId){
         if(caseId == null){
             return ServerResponse.error(1,"请选择要执行的用例");

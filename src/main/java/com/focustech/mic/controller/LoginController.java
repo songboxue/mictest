@@ -48,8 +48,8 @@ public class LoginController {
     //获取首页
     @RequestMapping(value = "/getIndex.do")
     @ResponseBody
-    public ServerResponse getVoIndex(String username) {
-        String voIndexPage = iLoginService.getVoIndexPage(username);
+    public ServerResponse getVoIndex() {
+        String voIndexPage = iLoginService.getVoIndexPage();
         return ServerResponse.successData(voIndexPage);
     }
 }
