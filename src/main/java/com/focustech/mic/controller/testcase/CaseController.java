@@ -44,7 +44,7 @@ public class CaseController {
         List<MicCase> micCaseList = new ArrayList<>();
         micCaseList = iCaseService.getCaseList(pid);
         model.addAttribute("mcList",micCaseList);
-        return "case/list";
+        return "index";
     }
 
     //更新用例

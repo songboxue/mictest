@@ -9,3 +9,4 @@ out
 gen
 /src/main/resources/datasource.properties
 /target/
+!/src/main/resources/datasource.properties

@@ -11,7 +11,13 @@ public class MicCase {
 
     private Integer projectId;
 
+    private Integer csrfToken;
+
+    private String pageUrl;
+
     private String dataUrl;
+
+    private String dataHeader;
 
     private String dataSend;
 
@@ -31,12 +37,15 @@ public class MicCase {
 
     private Date updateTime;
 
-    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, String dataUrl, String dataSend, String dataExpect, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
+    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, Integer csrfToken, String pageUrl, String dataUrl, String dataHeader, String dataSend, String dataExpect, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
         this.caseId = caseId;
         this.caseName = caseName;
         this.caseDesc = caseDesc;
         this.projectId = projectId;
+        this.csrfToken = csrfToken;
+        this.pageUrl = pageUrl;
         this.dataUrl = dataUrl;
+        this.dataHeader = dataHeader;
         this.dataSend = dataSend;
         this.dataExpect = dataExpect;
         this.caseStatus = caseStatus;
@@ -84,12 +93,36 @@ public class MicCase {
         this.projectId = projectId;
     }
 
+    public Integer getCsrfToken() {
+        return csrfToken;
+    }
+
+    public void setCsrfToken(Integer csrfToken) {
+        this.csrfToken = csrfToken;
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl == null ? null : pageUrl.trim();
+    }
+
     public String getDataUrl() {
         return dataUrl;
     }
 
     public void setDataUrl(String dataUrl) {
         this.dataUrl = dataUrl == null ? null : dataUrl.trim();
+    }
+
+    public String getDataHeader() {
+        return dataHeader;
+    }
+
+    public void setDataHeader(String dataHeader) {
+        this.dataHeader = dataHeader == null ? null : dataHeader.trim();
     }
 
     public String getDataSend() {
