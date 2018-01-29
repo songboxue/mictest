@@ -44,19 +44,7 @@
 
 <%@include file="../../jspf/js.jspf"%>
 
-
-
-
 <!--script for this page-->
-
-<%--<script>--%>
-    <%--//custom select box--%>
-
-    <%--$(function(){--%>
-        <%--$('select.styled').customSelect();--%>
-    <%--});--%>
-
-<%--</script>--%>
-
+<script src="../../assets/js/case-manager.js"></script>
 </body>
 </html>

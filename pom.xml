@@ -121,6 +121,7 @@
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
+      <scope>provided</scope>
     </dependency>
     <!-- 日志文件管理包 -->
     <!-- log start -->
@@ -200,6 +201,7 @@
           <artifactId>maven-jetty-plugin</artifactId>
           <version>6.1.7</version>
           <configuration>
+            <scanIntervalSeconds>2</scanIntervalSeconds>
             <connectors>
               <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                 <port>8888</port>

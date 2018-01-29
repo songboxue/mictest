@@ -59,4 +59,13 @@ public class CaseServiceImpl implements ICaseService {
         result = HttpUtil.doPost(url,body);
         return ServerResponse.successData(result);
     }
+
+    @Override
+    public ServerResponse getDetail(String caseId) {
+        MicCase micCase = micCaseMapper.selectByPrimaryKey(Integer.valueOf(caseId));
+        if(micCase == null){
+            return ServerResponse.error(2,"找不到此记录");
+        }
+        return ServerResponse.successData(micCase);
+    }
 }

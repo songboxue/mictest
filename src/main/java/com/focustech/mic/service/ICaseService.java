@@ -18,4 +18,6 @@ public interface ICaseService {
     ServerResponse updateCase(MicCase micCase);
 
     ServerResponse exeCase(Integer caseId);
+
+    ServerResponse getDetail(String caseId);
 }

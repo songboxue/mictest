@@ -47,6 +47,17 @@ public class CaseController {
         return "/case/index";
     }
 
+    //根据caseId获取用例的详细信息
+    @RequestMapping(value = "/detail" ,method = RequestMethod.POST)
+    @ResponseBody
+    //todo 使用valid进行参数校验，需要自定义错误处理类
+    public ServerResponse getDetail(@RequestParam(value = "caseId") String caseId){
+        if(caseId == null || caseId.equals("")){
+            return ServerResponse.error(1,"参数为空");
+        }
+        return iCaseService.getDetail(caseId);
+    }
+
     //更新用例
     @RequestMapping(value = "/update")
     public ServerResponse updateCase(MicCase micCase){
