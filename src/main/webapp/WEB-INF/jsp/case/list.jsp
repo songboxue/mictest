@@ -16,7 +16,7 @@
                             <th class="hidden-phone"><i class="fa fa-question-circle"></i> Name</th>
                             <th><i class="fa fa-bookmark"></i> Description</th>
                             <th><i class=" fa fa-edit"></i> Status</th>
-                            <th></th>
+                            <th><button class="case-add">ADD</button></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -28,7 +28,7 @@
                                 <td>${mc.caseStatus}</td>
                                 <td>
                                     <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                    <button class="btn btn-primary btn-xs">
+                                    <button class="btn btn-primary btn-xs btn-edit">
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                     <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
@@ -41,7 +41,7 @@
             </div><!-- /col-md-12 -->
         </div><!-- /row -->
 
-        <!-- 模态框（Modal） -->
+        <!-- 编辑用例及显示详情的模态框（Modal） -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -50,7 +50,7 @@
                         <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="case-detail">
+                        <form class="case-detail" id="caseForm">
                             序号：<input type="text" name="caseId" id="caseId">
                             用例名称：<input type="text" name="caseName" id="caseName">
                             用例描述：<input type="text" name="caseDesc" id="caseDesc">
@@ -61,11 +61,11 @@
                             期望结果：<input type="text" name="dataExpect" id="dataExpect">
                             创建时间：<input type="text" name="createTime" id="createTime">
                             更新时间：<input type="text" name="updateTime" id="updateTime">
-                        </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary">提交更改</button>
+                        <button type="button" class="btn btn-primary btn-update">提交</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal -->

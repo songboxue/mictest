@@ -6,10 +6,7 @@ import com.focustech.mic.service.ICaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -59,8 +56,9 @@ public class CaseController {
     }
 
     //更新用例
-    @RequestMapping(value = "/update")
-    public ServerResponse updateCase(MicCase micCase){
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse updateCase(@RequestBody MicCase micCase){
         if(micCase == null){
             return ServerResponse.error(1,"更新数据为空");
         }

@@ -45,6 +45,7 @@
 <%@include file="../../jspf/js.jspf"%>
 
 <!--script for this page-->
+<script src="../../assets/js/jquery.serializejson.js"></script>
 <script src="../../assets/js/case-manager.js"></script>
 </body>
 </html>

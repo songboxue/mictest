@@ -42,8 +42,7 @@ public class CaseServiceImpl implements ICaseService {
         if(result<1){
             return ServerResponse.error(2,"更新数据库失败");
         }
-        MicCase newCase = micCaseMapper.selectByPrimaryKey(micCase.getCaseId());
-        return ServerResponse.successData(newCase);
+        return ServerResponse.success();
     }
 
     @Override
