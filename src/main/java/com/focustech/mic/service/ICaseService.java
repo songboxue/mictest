@@ -2,6 +2,7 @@ package com.focustech.mic.service;
 
 import com.focustech.mic.common.ServerResponse;
 import com.focustech.mic.pojo.MicCase;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface ICaseService {
     ServerResponse exeCase(Integer caseId);
 
     ServerResponse getDetail(String caseId);
+
+    ServerResponse dealCaseExcel(String name, MultipartFile file);
 }

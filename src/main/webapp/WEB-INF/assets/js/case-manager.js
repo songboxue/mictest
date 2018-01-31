@@ -49,7 +49,13 @@ $(function () {
 
     //点击提交更改时将内容更新到后台
     $(".btn-update").on("click",function(){
-        caseReplace("update");
+        var sufUrl;
+        if($("#caseId").val()){
+            sufUrl = "update";
+        }else{
+            sufUrl = "add";
+        }
+        caseReplace(sufUrl);
     });
 
     //绑定添加用例按钮的点击事件

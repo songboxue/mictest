@@ -3,10 +3,13 @@ package com.focustech.mic.controller.testcase;
 import com.focustech.mic.common.ServerResponse;
 import com.focustech.mic.pojo.MicCase;
 import com.focustech.mic.service.ICaseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -21,13 +24,15 @@ import java.util.List;
 @RequestMapping("/case")
 public class CaseController {
 
+    private Logger logger = LoggerFactory.getLogger(CaseController.class);
+
     @Autowired
     private ICaseService iCaseService;
 
     //增加用例
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse addCase(MicCase micCase){
+    public ServerResponse addCase(@RequestBody MicCase micCase){
         if(micCase == null){
             return ServerResponse.error(1,"数据为空");
         }
@@ -73,5 +78,17 @@ public class CaseController {
             return ServerResponse.error(1,"请选择要执行的用例");
         }
         return iCaseService.exeCase(caseId);
+    }
+
+    @RequestMapping(value = "/upload")
+    @ResponseBody
+    public ServerResponse uploadCaseExcel(MultipartFile file){
+        if(file == null || file.getSize()==0){
+            return ServerResponse.error(1,"文件为空");
+        }
+        logger.info("接收文件："+file.getOriginalFilename());
+
+        String name = file.getOriginalFilename();
+        return iCaseService.dealCaseExcel(name,file);
     }
 }

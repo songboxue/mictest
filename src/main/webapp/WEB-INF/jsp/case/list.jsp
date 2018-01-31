@@ -51,7 +51,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="case-detail" id="caseForm">
-                            序号：<input type="text" name="caseId" id="caseId">
+                            <input type="text" name="caseId" id="caseId" style="display: none">
                             用例名称：<input type="text" name="caseName" id="caseName">
                             用例描述：<input type="text" name="caseDesc" id="caseDesc">
                             用例状态：<input type="text" name="caseStatus" id="caseStatus">
