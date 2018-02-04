@@ -12,7 +12,7 @@
       <arg column="data_url" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="data_header" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="data_send" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="data_expect" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="data_except" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="case_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="adder_no" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="adder_name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     case_id, case_name, case_desc, project_id, csrf_token, page_url, data_url, data_header, 
-    data_send, data_expect, case_status, adder_no, adder_name, create_time, update_no, 
+    data_send, data_except, case_status, adder_no, adder_name, create_time, update_no,
     update_name, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -41,13 +41,13 @@
     insert into mic_case (case_id, case_name, case_desc, 
       project_id, csrf_token, page_url, 
       data_url, data_header, data_send, 
-      data_expect, case_status, adder_no, 
+      data_except, case_status, adder_no,
       adder_name, create_time, update_no, 
       update_name, update_time)
     values (#{caseId,jdbcType=INTEGER}, #{caseName,jdbcType=VARCHAR}, #{caseDesc,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{csrfToken,jdbcType=INTEGER}, #{pageUrl,jdbcType=VARCHAR}, 
       #{dataUrl,jdbcType=VARCHAR}, #{dataHeader,jdbcType=VARCHAR}, #{dataSend,jdbcType=VARCHAR}, 
-      #{dataExpect,jdbcType=VARCHAR}, #{caseStatus,jdbcType=INTEGER}, #{adderNo,jdbcType=INTEGER}, 
+      #{dataExcept,jdbcType=VARCHAR}, #{caseStatus,jdbcType=INTEGER}, #{adderNo,jdbcType=INTEGER},
       #{adderName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateNo,jdbcType=INTEGER}, 
       #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -81,8 +81,8 @@
       <if test="dataSend != null">
         data_send,
       </if>
-      <if test="dataExpect != null">
-        data_expect,
+      <if test="dataExcept != null">
+        data_except,
       </if>
       <if test="caseStatus != null">
         case_status,
@@ -134,8 +134,8 @@
       <if test="dataSend != null">
         #{dataSend,jdbcType=VARCHAR},
       </if>
-      <if test="dataExpect != null">
-        #{dataExpect,jdbcType=VARCHAR},
+      <if test="dataExcept != null">
+        #{dataExcept,jdbcType=VARCHAR},
       </if>
       <if test="caseStatus != null">
         #{caseStatus,jdbcType=INTEGER},
@@ -187,8 +187,8 @@
       <if test="dataSend != null">
         data_send = #{dataSend,jdbcType=VARCHAR},
       </if>
-      <if test="dataExpect != null">
-        data_expect = #{dataExpect,jdbcType=VARCHAR},
+      <if test="dataExcept != null">
+        data_except = #{dataExcept,jdbcType=VARCHAR},
       </if>
       <if test="caseStatus != null">
         case_status = #{caseStatus,jdbcType=INTEGER},
@@ -224,7 +224,7 @@
       data_url = #{dataUrl,jdbcType=VARCHAR},
       data_header = #{dataHeader,jdbcType=VARCHAR},
       data_send = #{dataSend,jdbcType=VARCHAR},
-      data_expect = #{dataExpect,jdbcType=VARCHAR},
+      data_except = #{dataExcept,jdbcType=VARCHAR},
       case_status = #{caseStatus,jdbcType=INTEGER},
       adder_no = #{adderNo,jdbcType=INTEGER},
       adder_name = #{adderName,jdbcType=VARCHAR},

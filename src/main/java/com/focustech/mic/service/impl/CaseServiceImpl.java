@@ -1,6 +1,7 @@
 package com.focustech.mic.service.impl;
 
 import com.focustech.mic.common.ServerResponse;
+import com.focustech.mic.constants.CaseConst;
 import com.focustech.mic.dao.MicCaseMapper;
 import com.focustech.mic.pojo.MicCase;
 import com.focustech.mic.service.ICaseService;
@@ -85,13 +86,13 @@ public class CaseServiceImpl implements ICaseService {
         //excel的内容起始行及起止列，注意起始下标是0
         int startRow = 1;
         int startColumn = ExcelUtil.getIndexByLetter("A");
-        int colSize = ExcelUtil.getIndexByLetter("D")-startColumn +1;
+        int colSize = ExcelUtil.getIndexByLetter("I")-startColumn +1;
         List<List<String>> dataList = null;
 
         //todo 校验文件，错误就抛出异常
         validate(name);
         //转换成字节数组
-        byte[] buffer = null;
+        byte[] buffer;
         try{
             buffer = file.getBytes();
             dataList = ExcelUtil.parseExcel(startRow,startColumn,colSize,buffer);
@@ -104,20 +105,29 @@ public class CaseServiceImpl implements ICaseService {
 
         //开始转换并插库
         int successNum = 0;
+        List<List<String>> errorList = new ArrayList<>();//错误列表
         for(int i=0;i<dataSize;i++){
-            MicCase micCase = null;
-            boolean succFlag = convert(micCase,dataList.get(i));
-            //插入数据库
-            if(succFlag){
+            try{
+                MicCase micCase = new MicCase();
+                boolean succFlag = convert(micCase,dataList.get(i));
+                //插入数据库
+                if(!succFlag){
+                    errorList.add(dataList.get(i));
+                    continue;
+                }
                 int insertNum = micCaseMapper.insertSelective(micCase);
                 successNum += insertNum;
+            }catch (Exception e){
+                continue;
             }
+
         }
         logger.info("成功插入数据库"+successNum+"条");
 
-        //将MicCase列表插入数据库
-        //todo 返回错误记录
-        return ServerResponse.successData(dataList);
+        if(successNum == dataSize){
+            return ServerResponse.success();
+        }
+        return ServerResponse.errorData(2,"以下数据处理错误",errorList);
     }
 
     private void validate(String name) {
@@ -128,8 +138,13 @@ public class CaseServiceImpl implements ICaseService {
     将excel中获取到的数据转换成JavaBean形式
      */
     private boolean convert(MicCase micCase, List<String> dataList) {
+        try{
+            ExcelUtil.listToBean(micCase,dataList, CaseConst.caseFeilds);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
 
-        //成功返回1，否则0
-        return false;
     }
 }

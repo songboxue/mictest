@@ -21,7 +21,7 @@ public class MicCase {
 
     private String dataSend;
 
-    private String dataExpect;
+    private String dataExcept;
 
     private Integer caseStatus;
 
@@ -37,7 +37,7 @@ public class MicCase {
 
     private Date updateTime;
 
-    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, Integer csrfToken, String pageUrl, String dataUrl, String dataHeader, String dataSend, String dataExpect, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
+    public MicCase(Integer caseId, String caseName, String caseDesc, Integer projectId, Integer csrfToken, String pageUrl, String dataUrl, String dataHeader, String dataSend, String dataExcept, Integer caseStatus, Integer adderNo, String adderName, Date createTime, Integer updateNo, String updateName, Date updateTime) {
         this.caseId = caseId;
         this.caseName = caseName;
         this.caseDesc = caseDesc;
@@ -47,7 +47,7 @@ public class MicCase {
         this.dataUrl = dataUrl;
         this.dataHeader = dataHeader;
         this.dataSend = dataSend;
-        this.dataExpect = dataExpect;
+        this.dataExcept = dataExcept;
         this.caseStatus = caseStatus;
         this.adderNo = adderNo;
         this.adderName = adderName;
@@ -133,12 +133,12 @@ public class MicCase {
         this.dataSend = dataSend == null ? null : dataSend.trim();
     }
 
-    public String getDataExpect() {
-        return dataExpect;
+    public String getDataExcept() {
+        return dataExcept;
     }
 
-    public void setDataExpect(String dataExpect) {
-        this.dataExpect = dataExpect == null ? null : dataExpect.trim();
+    public void setDataExcept(String dataExcept) {
+        this.dataExcept = dataExcept == null ? null : dataExcept.trim();
     }
 
     public Integer getCaseStatus() {

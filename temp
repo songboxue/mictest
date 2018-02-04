@@ -3,6 +3,6 @@ caseDesc:测试用例描述
 projectId:0
 dataUrl:membercenter.cn.made-in-china.com
 dataSend:aaa
-dataExpect:success
+dataExcept:success
 
 {"myClass":"AWAction","myMethod":"myAW","paramsin":{"firststr":"第一个","secondstr":"AW脚本"},"paramsout":"resultstr"}

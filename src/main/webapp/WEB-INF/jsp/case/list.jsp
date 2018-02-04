@@ -16,7 +16,10 @@
                             <th class="hidden-phone"><i class="fa fa-question-circle"></i> Name</th>
                             <th><i class="fa fa-bookmark"></i> Description</th>
                             <th><i class=" fa fa-edit"></i> Status</th>
-                            <th><button class="case-add">ADD</button></th>
+                            <th>
+                                <button class="case-add">添加用例</button>
+                                <button class="upload-btn">批量导入</button>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,7 +61,7 @@
                             接口地址：<input type="text" name="dataUrl" id="dataUrl">
                             Header：<input type="text" name="dataHeader" id="dataHeader">
                             发送请求：<input type="text" name="dataSend" id="dataSend">
-                            期望结果：<input type="text" name="dataExpect" id="dataExpect">
+                            期望结果：<input type="text" name="dataExcept" id="dataExcept">
                             创建时间：<input type="text" name="createTime" id="createTime">
                             更新时间：<input type="text" name="updateTime" id="updateTime">
                         </form>
