@@ -126,8 +126,10 @@ public class CaseServiceImpl implements ICaseService {
 
         if(successNum == dataSize){
             return ServerResponse.success();
+        }else if(successNum == 0 && dataSize>0){
+            return ServerResponse.errorData(3,"导入失败",errorList);
         }
-        return ServerResponse.errorData(2,"以下数据处理错误",errorList);
+        return ServerResponse.errorData(2,"部分数据处理错误",errorList);
     }
 
     private void validate(String name) {

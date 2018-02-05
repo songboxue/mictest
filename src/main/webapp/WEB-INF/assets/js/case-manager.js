@@ -62,4 +62,10 @@ $(function () {
     $(".case-add").on("click",function(){
         $("#myModal").modal('show');
     })
+
+    //批量上传用例事件绑定
+    $(".upfile-btn").on("click",function(){
+        $("#uploadModal").modal('show');
+    })
+
 })

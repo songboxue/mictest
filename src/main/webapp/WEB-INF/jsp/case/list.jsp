@@ -18,7 +18,7 @@
                             <th><i class=" fa fa-edit"></i> Status</th>
                             <th>
                                 <button class="case-add">添加用例</button>
-                                <button class="upload-btn">批量导入</button>
+                                <button class="upfile-btn">上传Excel</button>
                             </th>
                         </tr>
                         </thead>
@@ -70,6 +70,27 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                         <button type="button" class="btn btn-primary btn-update">提交</button>
                     </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <!-- 编辑用例及显示详情的模态框（Modal） -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="uploadModalLabel">模态框（Modal）标题</h4>
+                    </div>
+                    <form action="/case/upload" method="POST">
+                        <div class="modal-body">
+                            <label><a href="/case/downloadTemplate">点击这里</a>下载用例模板</label>
+                            <label>选择文件：<input type="file" name="file"></label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary js-upload-confirm">提交</button>
+                        </div>
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal -->
         </div>

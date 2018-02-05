@@ -82,13 +82,21 @@ public class CaseController {
 
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public ServerResponse uploadCaseExcel(MultipartFile file){
+    public String uploadCaseExcel(MultipartFile file,Model model){
         if(file == null || file.getSize()==0){
-            return ServerResponse.error(1,"文件为空");
+            return null;
         }
         logger.info("接收文件："+file.getOriginalFilename());
 
         String name = file.getOriginalFilename();
-        return iCaseService.dealCaseExcel(name,file);
+        ServerResponse respData = iCaseService.dealCaseExcel(name,file);
+
+        model.addAttribute("code",respData.getCode());
+        model.addAttribute("msg",respData.getMsg());
+        if(respData.getCode() != 0){
+            model.addAttribute("data",respData.getData());
+        }
+        //处理完毕后返回更新后的用例页面，加入错误信息模块
+        return "/case/result";
     }
 }
