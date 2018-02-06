@@ -2,6 +2,7 @@ package com.focustech.mic.util;
 
 import com.focustech.mic.common.ClientManager;
 import com.focustech.mic.constants.ResponseConst;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -154,4 +155,11 @@ public class HttpUtil {
         return httpStr;
     }
 
+
+
+    public static String doPost(String url, List<Header> headerList, String body) {
+
+
+        return null;
+    }
 }
