@@ -61,7 +61,7 @@
                             接口地址：<input type="text" name="dataUrl" id="dataUrl">
                             Header：<input type="text" name="dataHeader" id="dataHeader">
                             发送请求：<input type="text" name="dataSend" id="dataSend">
-                            期望结果：<input type="text" name="dataExcept" id="dataExcept">
+                            期望结果：<input type="text" name="dataExpect" id="dataExpect">
                             创建时间：<input type="text" name="createTime" id="createTime">
                             更新时间：<input type="text" name="updateTime" id="updateTime">
                         </form>

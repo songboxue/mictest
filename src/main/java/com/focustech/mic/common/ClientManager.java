@@ -1,6 +1,8 @@
 package com.focustech.mic.common;
 
+import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.HashMap;
@@ -13,6 +15,7 @@ import java.util.Map;
  */
 public class ClientManager {
 
+    //todo 使用单例模式实现安全的httpclient工具类
 //    private static ThreadLocal<HttpClient> clientHolder = new ThreadLocal<HttpClient>();
 //
 //    public static HttpClient getClient() {
@@ -48,10 +51,14 @@ public class ClientManager {
 
     private static String username;
 
+    private static HttpHost proxy = new HttpHost("192.168.16.67",8080);
+
     public static HttpClient getClient() {
         HttpClient client = clientHolder.get(username);
         if(client == null){
             client = new DefaultHttpClient();
+            client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+            username = "inituser";
             clientHolder.put(username,client);
         }
         return client;

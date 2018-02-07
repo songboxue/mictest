@@ -84,8 +84,8 @@ public class LoginServiceImpl implements ILoginService {
 
     private String loginCD(String username,String password) throws IOException {
         HttpClient client = new DefaultHttpClient();
-        //HttpHost proxy = new HttpHost("192.168.16.67", 8080);
-        //client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+        HttpHost proxy = new HttpHost("192.168.16.67", 8080);
+        client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
         String cdUrl = "http://cd.abiz.com/logon/gbk";
         HttpPost post = new HttpPost(cdUrl);
         //添加所需要的post内容

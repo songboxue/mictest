@@ -8,7 +8,7 @@ import java.util.List;
  * Description:
  */
 public class CaseConst {
-    public static final String[] CASE_FEILDS = {"caseName","caseDesc","dataHeader","dataUrl","dataSend","dataExcept","csrfToken","pageUrl","projectId"};
+    public static final String[] CASE_FEILDS = {"caseName","caseDesc","dataHeader","dataUrl","dataSend","dataExpect","csrfToken","pageUrl","projectId"};
 
     public static final String CONTENTTYPE_JSON = "application/json";
 

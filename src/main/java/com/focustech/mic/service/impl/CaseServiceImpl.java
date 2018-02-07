@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +124,7 @@ public class CaseServiceImpl implements ICaseService {
         return ServerResponse.errorData(2, "部分数据处理错误", errorList);
     }
 
+    //todo 检验
     private void validate(String name) {
     }
 
@@ -153,32 +155,30 @@ public class CaseServiceImpl implements ICaseService {
         //解析header，将传入的json字符串转换成Header对象        ;
         List<Header> headerList = resolveHeader(micCase.getDataHeader());
         String url = micCase.getDataUrl();
+        String body = micCase.getDataSend();
+
         //根据contentType处理请求
         String headerStr = micCase.getDataHeader();
-
-        //如果自定义了消息格式，就要重新封装body
-        String body = micCase.getDataSend();
-        if (headerStr != null && !"".equals(headerStr)
-                && headerStr.indexOf("Content-Type") != -1) {
-            //如果指定了Content-Type的内容，就需要自定义消息格式
-            String contentType = getValueByKey(headerStr, "Content-Type");
-            body = resolveBody(micCase.getDataSend(), contentType);
-        }
+        String contentType = HttpUtil.getValueByKey(headerStr, "Content-Type");
+//
+//        //如果自定义了消息格式，就要重新封装body
+//
+//        if (headerStr != null && !"".equals(headerStr)
+//                && headerStr.indexOf("Content-Type") != -1) {
+//            //如果指定了Content-Type的内容，就需要自定义消息格式
+//            String contentType = HttpUtil.getValueByKey(headerStr, "Content-Type");
+//            body = resolveBody(micCase.getDataSend(), contentType);
+//        }
 
         //调用请求
-        String result = HttpUtil.doPost(url, headerList,body);
-        return ServerResponse.successData(result);
+        String result = HttpUtil.doPost(url, contentType, headerList, body);
+        String exceptResult = micCase.getDataExcept();
+        if(result.contains(exceptResult)){
+            return ServerResponse.success();
+        }
+        return ServerResponse.errorData(2,"执行失败",result);
     }
 
-    /*
-    从一个JSON字符串中根据key获取到对应的value
-     */
-    private String getValueByKey(String str, String key) {
-        JSONObject jo = JSON.parseObject(str);
-        String value = jo.getString(key);
-        return value == null ? "" : value;
-
-    }
 
     /*
     真正解析header字符串的方法
@@ -197,38 +197,5 @@ public class CaseServiceImpl implements ICaseService {
         return headers;
     }
 
-    /*
-    根据不同的content-type将存储的json格式的消息体转换成需要的字符串
-     */
-    private String resolveBody(String body, String contentType) {
-        String bodyStr;
-        switch(contentType){
-            case CaseConst.CONTENTTYPE_JSON:
-               //默认就是application/json
-                bodyStr = body;
-                break;
-            case CaseConst.CONTENTTYPE_URLENCODED:
-                //将json装换成普通表单形式
-                bodyStr = JSONToUrlencoded(body);
-                break;
-            //其他的消息格式日后再写，如form-data
-            default:
-                bodyStr = body;
-                break;
-        }
-        return bodyStr;
-    }
 
-    /*
-    将json字符串装换成x-www-form-urlencoded形式的字符串
-    因为我现在收集到的表单形式字符串都是key=value的格式，所以不做递归遍历了，能解析成啥样就啥样
-     */
-    private String JSONToUrlencoded(String jsonStr) {
-        JSONObject jo = JSON.parseObject(jsonStr);
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, Object> entry : jo.entrySet()) {
-            sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
-        }
-        return sb.deleteCharAt(sb.length()-1).toString();
-    }
 }
