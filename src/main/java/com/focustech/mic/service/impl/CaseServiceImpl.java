@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.focustech.mic.common.ServerResponse;
 import com.focustech.mic.constants.CaseConst;
 import com.focustech.mic.dao.MicCaseMapper;
+import com.focustech.mic.pojo.CaseResult;
 import com.focustech.mic.pojo.MicCase;
 import com.focustech.mic.service.ICaseService;
 import com.focustech.mic.util.ExcelUtil;
@@ -124,6 +125,66 @@ public class CaseServiceImpl implements ICaseService {
         return ServerResponse.errorData(2, "部分数据处理错误", errorList);
     }
 
+    @Override
+    public ServerResponse batchExecute(List<Integer> caseIds) {
+        final List<CaseResult> caseResults = new ArrayList<>();
+        final List<MicCase> micCases = micCaseMapper.selectCaseListByIds(caseIds);
+        //不用另起线程
+        if(caseIds.size()<=3){
+            for(MicCase micCase : micCases){
+                //执行单个用例
+                caseResults.add(doSingleCase(micCase));
+            }
+            return ServerResponse.successData(caseResults);
+        }else{
+            //后台执行
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for(MicCase micCase : micCases){
+                        //执行单个用例
+                        caseResults.add(doSingleCase(micCase));
+                    }
+                    //todo 线程任务执行完成后的提示信息，反射或自定义接口
+                }
+            });
+            thread.run();
+            return ServerResponse.successData("任务提交成功");
+        }
+    }
+
+    private CaseResult doSingleCase(MicCase micCase) {
+        CaseResult caseResult = new CaseResult();
+        //解析header，将传入的json字符串转换成Header对象        ;
+        List<Header> headerList = resolveHeader(micCase.getDataHeader());
+        String url = micCase.getDataUrl();
+        String body = micCase.getDataSend();
+
+        //根据contentType处理请求
+        String headerStr = micCase.getDataHeader();
+        String contentType = HttpUtil.getValueByKey(headerStr, "Content-Type");
+//
+//        //如果自定义了消息格式，就要重新封装body
+//
+//        if (headerStr != null && !"".equals(headerStr)
+//                && headerStr.indexOf("Content-Type") != -1) {
+//            //如果指定了Content-Type的内容，就需要自定义消息格式
+//            String contentType = HttpUtil.getValueByKey(headerStr, "Content-Type");
+//            body = resolveBody(micCase.getDataSend(), contentType);
+//        }
+
+        //调用请求
+        String result = HttpUtil.doPost(url, contentType, headerList, body);
+        String exceptResult = micCase.getDataExcept();
+        boolean succFlag = result.contains(exceptResult);
+
+        caseResult.setCaseId(micCase.getCaseId());
+        caseResult.setResultCode(succFlag?0:1);
+        caseResult.setResultMessage(succFlag?"成功":result);
+
+        return caseResult;
+    }
+
     //todo 检验
     private void validate(String name) {
     }
@@ -178,6 +239,7 @@ public class CaseServiceImpl implements ICaseService {
         }
         return ServerResponse.errorData(2,"执行失败",result);
     }
+
 
 
     /*

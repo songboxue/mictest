@@ -243,4 +243,14 @@
       where project_id = #{pid,jdbcType=INTEGER}
     </if>
   </select>
+
+  <select id="selectCaseListByIds" parameterType="java.util.ArrayList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mic_case where 1=1
+    <foreach collection="caseIds" open="(" separator="," close=")" item="caseId">
+      and case_id = #{caseId}
+    </foreach>
+  </select>
+
 </mapper>

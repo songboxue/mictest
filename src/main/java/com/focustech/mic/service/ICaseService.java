@@ -23,4 +23,6 @@ public interface ICaseService {
     ServerResponse getDetail(String caseId);
 
     ServerResponse dealCaseExcel(String name, MultipartFile file);
+
+    ServerResponse batchExecute(List<Integer> caseIds);
 }

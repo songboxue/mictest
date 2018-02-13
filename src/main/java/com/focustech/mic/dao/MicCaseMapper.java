@@ -20,4 +20,6 @@ public interface MicCaseMapper {
     int updateByPrimaryKey(MicCase record);
 
     List<MicCase> selectByPId(Integer pid);
+
+    List<MicCase> selectCaseListByIds(List<Integer> caseIds);
 }

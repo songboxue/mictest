@@ -99,4 +99,14 @@ public class CaseController {
         //处理完毕后返回更新后的用例页面，加入错误信息模块
         return "/case/result";
     }
+
+    //批量执行
+    @RequestMapping(value = "/batchExecute")
+    @ResponseBody
+    public ServerResponse batchExecute(List<Integer> caseIds){
+        if(caseIds == null){
+            return ServerResponse.error(1,"请选择要执行的用例");
+        }
+        return iCaseService.batchExecute(caseIds);
+    }
 }

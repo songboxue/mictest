@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.focustech.mic.dao.CaseExcelMapper" >
+  <resultMap id="BaseResultMap" type="com.focustech.mic.pojo.CaseExcel" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="filename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="message" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="adder_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.focustech.mic.pojo.CaseExcel" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="filename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="message" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="adder_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="attachment" jdbcType="LONGVARBINARY" javaType="_byte[]" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, filename, status, message, adder_no, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    attachment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from case_excel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from case_excel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.focustech.mic.pojo.CaseExcel" >
+    insert into case_excel (id, filename, status, 
+      message, adder_no, create_time, 
+      attachment)
+    values (#{id,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{adderNo,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{attachment,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.focustech.mic.pojo.CaseExcel" >
+    insert into case_excel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="adderNo != null" >
+        adder_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="adderNo != null" >
+        #{adderNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.focustech.mic.pojo.CaseExcel" >
+    update case_excel
+    <set >
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="adderNo != null" >
+        adder_no = #{adderNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.focustech.mic.pojo.CaseExcel" >
+    update case_excel
+    set filename = #{filename,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      adder_no = #{adderNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      attachment = #{attachment,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.focustech.mic.pojo.CaseExcel" >
+    update case_excel
+    set filename = #{filename,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      adder_no = #{adderNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
